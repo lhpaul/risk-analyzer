@@ -11,7 +11,73 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141208174935) do
+ActiveRecord::Schema.define(version: 20150201154008) do
+
+  create_table "cases", force: true do |t|
+    t.string "rol"
+    t.string "court"
+    t.string "admn_state"
+    t.string "stage"
+    t.string "proc"
+    t.string "proc_state"
+    t.date   "entry_date"
+    t.string "file_link"
+  end
+
+  create_table "cases_subjects", id: false, force: true do |t|
+    t.integer "subject_id"
+    t.integer "case_id"
+  end
+
+  add_index "cases_subjects", ["case_id"], name: "index_cases_subjects_on_case_id"
+  add_index "cases_subjects", ["subject_id"], name: "index_cases_subjects_on_subject_id"
+
+  create_table "delayed_jobs", force: true do |t|
+    t.integer  "priority",   default: 0, null: false
+    t.integer  "attempts",   default: 0, null: false
+    t.text     "handler",                null: false
+    t.text     "last_error"
+    t.datetime "run_at"
+    t.datetime "locked_at"
+    t.datetime "failed_at"
+    t.string   "locked_by"
+    t.string   "queue"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "delayed_jobs", ["priority", "run_at"], name: "delayed_jobs_priority"
+
+  create_table "events", force: true do |t|
+    t.integer "folio"
+    t.string  "file_link"
+    t.string  "stage"
+    t.string  "step"
+    t.text    "step_description"
+    t.date    "date"
+    t.integer "foja"
+  end
+
+  create_table "records", force: true do |t|
+    t.string   "data"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "reports", force: true do |t|
+    t.integer "state"
+    t.integer "done_jobs"
+  end
+
+  create_table "subjects", force: true do |t|
+    t.string  "name"
+    t.string  "rut"
+    t.string  "person_type"
+    t.string  "social_reason"
+    t.integer "report_id"
+  end
+
+  add_index "subjects", ["rut"], name: "index_subjects_on_rut"
 
   create_table "users", force: true do |t|
     t.string   "email",                  default: "", null: false
@@ -19,15 +85,13 @@ ActiveRecord::Schema.define(version: 20141208174935) do
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",          default: 0,  null: false
+    t.integer  "sign_in_count",          default: 0
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
     t.string   "last_sign_in_ip"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "name"
-    t.integer  "role"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true

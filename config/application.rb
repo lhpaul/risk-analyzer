@@ -4,22 +4,10 @@ require 'rails/all'
 
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
-Bundler.require(*Rails.groups)
+Bundler.require(:default, :assets, Rails.env)
 
-module RiskAnalyser
+module Radd
   class Application < Rails::Application
-
-    config.generators do |g|
-      g.test_framework :rspec,
-        fixtures: true,
-        view_specs: false,
-        helper_specs: false,
-        routing_specs: false,
-        controller_specs: false,
-        request_specs: false
-      g.fixture_replacement :factory_girl, dir: "spec/factories"
-    end
-
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.
@@ -31,5 +19,18 @@ module RiskAnalyser
     # The default locale is :en and all translations from config/locales/*.rb,yml are auto loaded.
     # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
     # config.i18n.default_locale = :de
+
+    config.autoload_paths += Dir["#{config.root}/lib/**/"]
+
+    # Enable escaping HTML in JSON.
+    config.active_support.escape_html_entities_in_json = true
+
+    config.to_prepare do
+      DeviseController.respond_to :html, :json
+    end
+
+    config.active_record.schema_format = :ruby
+
+    I18n.config.enforce_available_locales = false
   end
 end

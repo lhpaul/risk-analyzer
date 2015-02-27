@@ -1,0 +1,31 @@
+<div>
+  <h4>Seleccionar Archivo con los RUTS</h4>
+  <form action="" method="post" enctype="multipart/form-data">
+      <div class='form-group'>
+          <label for='excel_file'>Archivo Excel</label>
+          <input type="file" name="excel_file" accept=".xlsx" onchange="angular.element(this).scope().fileChanged(this.files);" required="true">
+      </div>
+
+      <div class='form-group' ng-show='sheets'>
+          <label for='sheet_name'>Nombre Hoja</label>
+          <select id="sheet_name" class="form-control" ng-model="selectedSheet" required="true" ng-required="true" ng-options="sheet.name for sheet in sheets">
+              <option value="">---- Select a sheet ----</option>
+          </select>
+      </div>
+
+      <input type="submit" value="Submit" data-ng-disabled='selectedSheet == null' ng-click='onSubmit()'>
+
+      <!-- <div ng-show="showPreview">
+          <table class="table table-bordered" ng-repeat="values in selectedSheet" ng-show="selectedSheet != null">
+              <thead>
+                  <tr>
+                      <th ng-bind="sheetName"></th>
+                  </tr>
+              </thead>
+              <tr ng-repeat="row in sheetData">
+                  <td ng-repeat="col in row" ng-bind="col"></td>
+              </tr>
+          </table>
+      </div> -->
+  </form>
+</div>

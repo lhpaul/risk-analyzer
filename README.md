@@ -1,50 +1,40 @@
-Riskanalyser
-================
+#RADD [![Build Status](https://travis-ci.org/jesalg/RADD.png?branch=master)](https://travis-ci.org/jesalg/RADD)
 
-[![Deploy to Heroku](https://www.herokucdn.com/deploy/button.png)](https://heroku.com/deploy)
+A basic example of how to use Rails, Devise and Angular.js in conjunction. 
 
-This application was generated with the [rails_apps_composer](https://github.com/RailsApps/rails_apps_composer) gem
-provided by the [RailsApps Project](http://railsapps.github.io/).
+This architecture treats Rails as a JSON API and AngularJS as the front-end framework which will do view rendering. 
 
-Rails Composer is open source and supported by subscribers. Please join RailsApps to support development of Rails Composer.
+More details on my blog posts:
 
-Problems? Issues?
------------
+- [Authentication with Rails, Devise and AngularJS][1]
+- [Architecting RESTful Rails 4 API][2]
 
-Need help? Ask on Stack Overflow with the tag 'railsapps.'
+###Demo
 
-Your application contains diagnostics in the README file. Please provide a copy of the README file when reporting any issues.
+http://radd.herokuapp.com/
 
-If the application doesn’t work as expected, please [report an issue](https://github.com/RailsApps/rails_apps_composer/issues)
-and include the diagnostics.
+###Install
 
-Ruby on Rails
--------------
+``bundle install``
 
-This application requires:
+``bundle exec rake db:setup``
 
-- Ruby 2.1.1
-- Rails 4.1.8
+``rails s``
 
-Learn more about [Installing Rails](http://railsapps.github.io/installing-rails.html).
+###Testing
 
-Getting Started
----------------
+Run this to execute the API test suite:
 
-Documentation and Support
--------------------------
+``rake db:test:prepare``
 
-Issues
--------------
+``rspec spec``
 
-Similar Projects
-----------------
+###Documentation
 
-Contributing
-------------
+API documentation is located at `/docs` and is generated using passing acceptance tests.
 
-Credits
--------
+Run this to regenerate the docs: `rake docs:generate`
 
-License
--------
+  [1]: http://jes.al/2013/08/authentication-with-rails-devise-and-angularjs/
+  [2]: http://jes.al/2013/10/architecting-restful-rails-4-api/
+

@@ -1,0 +1,9 @@
+language: ruby
+rvm:
+  - 1.9.3
+before_script:
+  - psql -c "CREATE DATABASE radd_test;" -U postgres
+script:
+  - RAILS_ENV=test bundle exec rake db:migrate --trace
+  - bundle exec rake db:test:prepare --trace
+  - bundle exec rspec spec

@@ -1,0 +1,19 @@
+<p>Reportes</p>
+
+<a class="btn btn-primary" ng-click="newReportButtonClicked()">Nuevo Reporte</a>
+<table ng-show="reports.length > 0" class="table table-striped">
+  <tr>
+    <td>#</td>
+    <td>Estado</td>
+  </tr>
+<tr ng-repeat="report in reports">
+  <td>{{$index + 1}}</td>
+  <td>
+    <div class="progress">
+      <div class="progress-bar" role="progressbar" aria-valuenow="{{ report.ready_porcentage }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ report.ready_porcentage }}%;">
+        {{ report.ready_porcentage }}%
+      </div>
+    </div>
+  </td>
+</tr ng-repeat-end>
+</table>

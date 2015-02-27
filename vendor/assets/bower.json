@@ -1,0 +1,12 @@
+{
+  "name": "dsl-generated dependencies",
+  "dependencies": {
+    "js-xlsx": "latest",
+    "lodash": "latest",
+    "jszip": "latest",
+    "angular": "latest",
+    "angular-resource": "latest",
+    "angular-strap": "latest",
+    "angular-route": "latest"
+  }
+}
