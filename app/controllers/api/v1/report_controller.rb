@@ -4,15 +4,24 @@ class Api::V1::ReportController < Api::V1::BaseController
 
   def index
     response = []
-    reports = Report.all
+    reports = current_user.reports
     reports.each do |report| ## Esto se puede optimizar en una query en vez de una query por cada reporte
-      response << {ready_porcentage: (report.done_jobs/report.subjects.count).to_i }
+      response << report.to_json
     end
     respond_with(response)
   end
 
   def show
-    @data = Report.find(params[:id]).to_json()
+    report = Report.find(params[:id])
+    respond_with(report.to_json)
+  end
+
+  def get_subjects
+    report = Report.find(params[:id])
+    @data = []
+    report.subjects.each do |subject|
+      @data << subject.to_json
+    end
     respond_with(@data)
   end
 
@@ -28,8 +37,9 @@ class Api::V1::ReportController < Api::V1::BaseController
   end
 
   def create
-    @report = Report.new
+    @report = Report.new(:name => report_params[:name])
     @report.add_subjects(report_params[:ruts])
+    @report.user_id = current_user.id;
     @report.save
     render json: { msj: 'ok'}
   end

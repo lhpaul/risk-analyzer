@@ -12,7 +12,7 @@ class Case < ActiveRecord::Base
   end
 
   def add_subject(subject)
-    unless subjects.find(subject)
+    unless subjects.find_by_rut(subject.rut)
       subjects << subject
     end
   end

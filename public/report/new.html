@@ -13,7 +13,12 @@
           </select>
       </div>
 
-      <input type="submit" value="Submit" data-ng-disabled='selectedSheet == null' ng-click='onSubmit()'>
+      <div ng-show='reportName !== null'>
+        <label for='reportName'>Nombre Reporte</label>
+        <input type='' ng-model='reportName'></input>
+      </div>
+
+      <button data-ng-disabled='selectedSheet == null' ng-click='onSubmit()'>Submit</button>
 
       <!-- <div ng-show="showPreview">
           <table class="table table-bordered" ng-repeat="values in selectedSheet" ng-show="selectedSheet != null">

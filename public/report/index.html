@@ -3,17 +3,38 @@
 <a class="btn btn-primary" ng-click="newReportButtonClicked()">Nuevo Reporte</a>
 <table ng-show="reports.length > 0" class="table table-striped">
   <tr>
-    <td>#</td>
+    <td>Nombre</td>
+    <td>Fecha de Creación</td>
     <td>Estado</td>
+    <td>Acciones</td>
   </tr>
 <tr ng-repeat="report in reports">
-  <td>{{$index + 1}}</td>
+  <td>{{ report.name }}</td>
+  <td>{{ report.created_at }}</td>
   <td>
-    <div class="progress">
-      <div class="progress-bar" role="progressbar" aria-valuenow="{{ report.ready_porcentage }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ report.ready_porcentage }}%;">
+    <div class="progress progress-striped active" ng-if='report.ready_porcentage < 100'>
+      <div class="bar" role="progressbar" aria-valuenow="{{ report.ready_porcentage }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ report.ready_porcentage }}%;">
         {{ report.ready_porcentage }}%
       </div>
     </div>
+
+    <div ng-if='report.ready_porcentage === 100'>Completado</div>
+  </td>
+  <td>
+    <button class='btn btn-danger' ng-click="deleteReportButtonClicked(report.id, $index)" ng-disabled="report.ready_porcentage < 100">Borrar</button> 
+    <button class='btn btn-info' id ='report_{{report.id}}' ng-click="downloadReportButtonClicked(report.id, report.name)" ng-disabled="report.ready_porcentage < 100">
+      Descargar
+    </button>
   </td>
 </tr ng-repeat-end>
 </table>
+
+<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-hidden="true" report-id="" report-index="">
+  <div class="modal-dialog modal-sm">
+    <h4 class="modal-title" id="myModalLabel">¿Seguro que desea borrar el reporte?</h4>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-dismiss="modal" ng-click="deleteReport()">Borrar</button>
+        <button type="button" class="btn btn-primary" data-dismiss="modal">Cancelar</button>
+    </div>
+  </div>
+</div>

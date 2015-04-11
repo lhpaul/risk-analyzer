@@ -6,10 +6,15 @@ angular.module('riskAnalyser.resources', ['ngResource'])
             index: { method: 'GET', isArray:true }
         });
     })
-    .factory('ReportRsrc', function($resource){
+    .factory('reportRsrc', function($resource){
         return $resource('/api/report/:report_id.json', {}, {
             show: { method: 'GET' },
             update: { method: 'PUT' },
-            destroy: { method: 'DELETE' }
+            delete: { method: 'DELETE' }
+        });
+    })
+    .factory('reportSubjectsRsrc', function($resource){
+        return $resource('/api/report/:report_id/subjects', {}, {
+            get_all: { method: 'GET', isArray:true },
         });
     });

@@ -24,6 +24,8 @@ ActiveRecord::Schema.define(version: 20150201154008) do
     t.string "file_link"
   end
 
+  add_index "cases", ["rol"], name: "index_cases_on_rol"
+
   create_table "cases_subjects", id: false, force: true do |t|
     t.integer "subject_id"
     t.integer "case_id"
@@ -58,15 +60,12 @@ ActiveRecord::Schema.define(version: 20150201154008) do
     t.integer "foja"
   end
 
-  create_table "records", force: true do |t|
-    t.string   "data"
+  create_table "reports", force: true do |t|
+    t.string   "name"
+    t.integer  "done_jobs",  default: 0
+    t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-  end
-
-  create_table "reports", force: true do |t|
-    t.integer "state"
-    t.integer "done_jobs"
   end
 
   create_table "subjects", force: true do |t|

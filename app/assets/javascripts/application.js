@@ -9,6 +9,8 @@
 //= require jszip
 //= require lodash
 //= require js-xlsx
+//= require xlsx.core.min
+//= require alasql.min
 //= require tools/xlsx-reader
 //= require resources/index
 //= require resources/reportRsrc

@@ -12,15 +12,19 @@ angular.module('riskAnalyser.appControllers').controller('newReportCtrl',[
 
     $scope.selectedSheet = null;
     $scope.sheets = null;
+    $scope.reportName = null;
  
     $scope.fileChanged = function(files) {
       // $scope.sheets = [];
       $scope.excelFile = files[0];
+      // console.log($scope.excelFile);
       xLSXReaderService.readFile($scope.excelFile, true, function(xlsxData) {
         $timeout(function() {
           $scope.sheets = xlsxData;
         }, 500);
       });
+
+      $scope.reportName = $scope.excelFile.name.split('.')[0]; // setear el nombre del reporte como el nombre del archivo
     };
 
     $scope.onSubmit = function() {
@@ -35,11 +39,13 @@ angular.module('riskAnalyser.appControllers').controller('newReportCtrl',[
 
       reportsRsrc.create({
         report: {
+          'name': $scope.reportName,
           'ruts': ruts
         }
       }, function() {
         $location.path('/reports');
       });
+      return false;
     };
   }
 ]);

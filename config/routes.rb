@@ -61,6 +61,7 @@ Radd::Application.routes.draw do
       end
 
       resources :report
+      match 'report/:id/subjects' => 'report#get_subjects', :via => :get
 
       resources :users, only: [:create]
       match '/users' => 'users#show', :via => :get
